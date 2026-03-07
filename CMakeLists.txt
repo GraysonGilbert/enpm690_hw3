@@ -7,19 +7,17 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
 
-add_executable(teleop src/teleop.cpp)
-target_include_directories(teleop PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)
-target_compile_features(teleop PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-ament_target_dependencies(
-  teleop
-  "rclcpp"
-)
 
-install(TARGETS teleop
+install(DIRECTORY
+  launch
+ 
+  DESTINATION share/${PROJECT_NAME}/
+  )
+
+install(PROGRAMS
+  src/teleop.py
+  
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
