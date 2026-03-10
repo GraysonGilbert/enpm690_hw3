@@ -22,7 +22,7 @@ def generate_launch_description():
     webots_package_dir = get_package_share_directory('walker')
     robot_description_path = os.path.join(webots_package_dir, 'resource', 'my_robot.urdf')
     
-    
+    # Robot controller
     robot_driver_node = WebotsController(
         robot_name='walker_robot',
         parameters=[{'robot_description': robot_description_path},]

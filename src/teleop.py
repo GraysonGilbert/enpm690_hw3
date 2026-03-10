@@ -13,7 +13,6 @@ class TeleOpNode(Node):
         # Create a publisher on the /cmd_vel topic
         self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
         self.settings = termios.tcgetattr(sys.stdin)
-        #self.run_teleop()
         
         # Create a timer that calls the callback every 0.1 seconds (10Hz)
         self.timer_period = 0.1  
@@ -21,6 +20,7 @@ class TeleOpNode(Node):
         
         self.get_logger().info('TeleOp Node has started!')
         
+        # List of acceptable key presses
         self.accepted_keys = ['w', 's', 'd', 'a', ' ']
 
     def teleop_callback(self):
@@ -33,37 +33,29 @@ class TeleOpNode(Node):
             
             if key == "w":
                 msg.linear.x = 0.5
-                msg.angular.z = 0.0
-                self.get_logger().info(f'Key Pressed: {key} Linear={msg.linear.x}, Angular={msg.angular.z}')
-                
+                msg.angular.z = 0.0 
             elif key == "s":
                 msg.linear.x = -0.5
                 msg.angular.z = 0.0
-                self.get_logger().info(f'Key Pressed: {key} Linear={msg.linear.x}, Angular={msg.angular.z}')
-                
             elif key == "a":
                 msg.linear.x = 0.0
-                msg.angular.z = 0.5
-                self.get_logger().info(f'Key Pressed: {key} Linear={msg.linear.x}, Angular={msg.angular.z}')
-                
+                msg.angular.z = 0.5 
             elif key == "d":
                 msg.linear.x = 0.0
-                msg.angular.z = -0.5
-                self.get_logger().info(f'Key Pressed: {key} Linear={msg.linear.x}, Angular={msg.angular.z}')
-                
+                msg.angular.z = -0.5 
             else:
                 msg.linear.x = 0.0
                 msg.angular.z = 0.0
-                self.get_logger().info(f'Key Pressed: {key} Linear={msg.linear.x}, Angular={msg.angular.z}')
-
+            
+            self.get_logger().info(f'Key Pressed: {key} Linear={msg.linear.x}, Angular={msg.angular.z}') # Log valid key press 
         else:
-            self.get_logger().info(f'Key not accepted! Press one of the following keys: [a,s,w,d, or space bar]')
+            self.get_logger().info(f'Key not accepted! Press one of the following keys: [a,s,w,d, or space bar]') # Log invalid key press
             
         # Publish the message
         if rclpy.ok():
             self.publisher_.publish(msg)
             
-
+    # Read in key presses
     def get_key_input(self):
         
         tty.setraw(sys.stdin.fileno())
@@ -84,7 +76,7 @@ def main(args=None):
         pass
     finally:
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, node.settings)
-        node.get_logger().info('Shutting down...')
+        node.get_logger().info('Shutting down...') # Handle node shutdown gracefully
         if rclpy.ok():
             node.destroy_node()
             rclpy.shutdown()
