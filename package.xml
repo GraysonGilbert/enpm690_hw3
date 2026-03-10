@@ -3,7 +3,7 @@
 <package format="3">
   <name>enpm690_hw3</name>
   <version>0.0.0</version>
-  <description>ENPM690 HW3: Robot teleoperation and autonoomous control</description>
+  <description>ENPM690 HW3: Robot teleoperation and autonomous control</description>
   <maintainer email="graysongilbert@gmail.com">grayson</maintainer>
   <license>TODO: License declaration</license>
 
