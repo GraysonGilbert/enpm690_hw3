@@ -11,12 +11,12 @@ find_package(ament_cmake REQUIRED)
 
 install(DIRECTORY
   launch
- 
   DESTINATION share/${PROJECT_NAME}/
   )
 
 install(PROGRAMS
   src/teleop.py
+  src/autonomous_nav.py
   
   DESTINATION lib/${PROJECT_NAME})
 
