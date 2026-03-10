@@ -19,6 +19,8 @@ class TeleOpNode(Node):
         self.timer = self.create_timer(self.timer_period, self.teleop_callback)
         
         self.get_logger().info('TeleOp Node has started!')
+        self.get_logger().info('Use the a, s, w, or d keys to drive the robot around!')
+        self.get_logger().info('Press space bar to stop the robot.')
         
         # List of acceptable key presses
         self.accepted_keys = ['w', 's', 'd', 'a', ' ']
