@@ -21,7 +21,9 @@ This project depends on:
 - **Catch2 Integration**: Install after setting up ROS2 using the following command
 
 ```sh
-source /opt/ros/humble/setup.bash  # if needed
+# Source ROS2 underlay and overlay
+source /opt/ros/humble/setup.bash
+source install/setup.bash
 apt install ros-${ROS_DISTRO}-catch-ros2
 ```
 ## **Environment Setup**
@@ -32,14 +34,13 @@ Navigate to where you would like to create your ROS2 workspace and run the follo
 ```sh
 # Source ROS2 underlay
 source /opt/ros/jazzy/setup.bash
-
+source install/setup.bash
 # Create ROS2 workspace directory
 mkdir ros2_ws
 cd ros2_ws/
 mkdir src
 cd src/
 cd ..
-
 # Build workspace
 colcon build
 ```
@@ -49,13 +50,11 @@ To install all the necessary packages navigate to the root of your ROS2 workspac
 ```sh
 # Source ROS2 underlay
 source /opt/ros/jazzy/setup.bash
-
 # Clone repositories
 cd src/
 git clone https://github.com/GraysonGilbert/my_webots_tutorials.git
 git clone https://github.com/GraysonGilbert/enpm690_hw3.git
 cd ..
-
 # Build packages
 colcon build
 ```
@@ -69,29 +68,29 @@ Navigate the robot around the simulation world by using the keys (a, s, w, d, an
 
 
 To the run the teleoperation simulation, you must first have two terminals open at the root of the ROS2 workspace. Then run the following commands:
-#### Run this in the 1st terminal
+#### Run this in the 1st terminal (from root of ros2 workspace)
 ```sh
-# Source ROS2 underlay
+# Source ROS2 underlay and overlay
 source /opt/ros/jazzy/setup.bash
-
+source install/setup.bash
 # Start teleop simulation 
 ros2 launch enpm690_hw3 teleop.launch.py 
 ```
-#### Run this in the 2nd terminal
+#### Run this in the 2nd terminal (from root of ros2 workspace)
 ```sh
-# Source ROS2 underlay
+# Source ROS2 underlay and overlay
 source /opt/ros/jazzy/setup.bash
-
+source install/setup.bash
 # Run teleop node
 ros2 run enpm690_hw3 teleop.py 
 ```
 
 ### Autonomous Navigation Simulation
-#### Run this in the 1st terminal
+#### Run this in the 1st terminal (from root of ros2 workspace)
 ```sh
 # Source ROS2 underlay
 source /opt/ros/jazzy/setup.bash
-
+source install/setup.bash
 # Start teleop simulation 
 # sensor_threshold is a tunable parameter. Input a value between [0, 0.15] to change 
 # the distance at which the robot will recognize an obstacle and move around it
